@@ -1,23 +1,29 @@
 // src/app/sellers/page.tsx
-import { getSession } from "next-auth/react";
+import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import Link from 'next/link';
+import Link from "next/link";
 
 export default async function SellerPage() {
-  const session = await getSession();
+  // Ensure getServerSession is used for server-side session retrieval
+  const session = await getServerSession();
 
-  if (!session || !session.user.isSeller) {
-    return redirect('/'); // Redirigir si no es vendedor
+  // Redirect if the session is missing or the user is not a seller
+  if (!session || !session.user?.isSeller) {
+    redirect("/"); // Redirect to homepage if not a seller
   }
 
   return (
     <div>
-      <h1>Perfil de Vendedor</h1>
-      <p>Bienvenido, {session.user.name}</p>
+      <h1>Seller Profile</h1>
+      <p>Welcome, {session.user.name}</p>
       <nav>
         <ul>
-          <li><Link href="/sellers/gallery">Mi galería</Link></li>
-          <li><Link href="/sellers/add-product">Añadir nuevo producto</Link></li>
+          <li>
+            <Link href="/sellers/gallery">My Gallery</Link>
+          </li>
+          <li>
+            <Link href="/sellers/add-product">Add New Product</Link>
+          </li>
         </ul>
       </nav>
     </div>
