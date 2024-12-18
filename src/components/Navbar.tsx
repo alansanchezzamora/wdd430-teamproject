@@ -21,8 +21,7 @@ const Navbar = () => {
 
         <ul className={`menu ${isOpen ? 'open' : ''}`}>
           <li><Link href="/">Home</Link></li>
-          <li><Link href="/users">User Profile</Link></li>
-          <li><Link href="/artisans">Artisans</Link></li>
+          <li><Link href="/users">User</Link></li>
           <li><Link href="/products">Products</Link></li>
         </ul>
       </nav>
