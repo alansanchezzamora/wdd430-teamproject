@@ -1,6 +1,6 @@
 // src/app/users/catalog/page.tsx
 //import { useEffect, useState } from 'react';
-import { db } from "../../../lib/db";
+import { db } from "../../lib/db";
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -20,18 +20,17 @@ export default async function CatalogPage() {
   `;
  //SELECT a.product_id, a.name, a.description, b.image_filename FROM products a INNER JOIN product_images b ON (a.product_id = b.product_id)
   return (
-    <div>
+    <div className="product-main">
 
-      <h1>Catálogo de Productos</h1>
-      <div>
+      <h1>Products Page</h1>
+      {/* <div>
         <label>Filter by Artists: </label>
         <select>
           <option value="">Select</option>
           <option value="ropa">Ropa</option>
           <option value="joyeria">Joyería</option>
-          {/* Otros filtros */}
         </select>
-      </div>
+      </div>  */}
 
       <ul className="card-container">
             {products.rows.map((product: any) => (
