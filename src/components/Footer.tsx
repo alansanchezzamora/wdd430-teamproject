@@ -3,7 +3,7 @@ const Footer = () => {
 
     return (
     <footer className="footer">
-        <p> &copy; {currentYear} WDD340-Group 8.</p>
+        <p> &copy; {currentYear} WDD430-Group 8.</p>
     </footer>
     );
 };

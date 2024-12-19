@@ -1,10 +1,7 @@
  
 import { NextApiRequest, NextApiResponse } from 'next';
-import { Pool } from 'pg';
+import { db } from "../../lib/db";
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-});
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
@@ -20,7 +17,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(400).json({ error: "Invalid product_id" });
     }
 
-    const { rows } = await pool.query(
+    const { rows } = await db
         `   
         SELECT a.product_id, a.name, a.description, b.image_filename, a.product_price, a.seller_id, c.name AS name_seller
                 FROM 
@@ -29,9 +26,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     product_images b ON (a.product_id = b.product_id)
                 INNER JOIN
                     sellers c ON (c.seller_id = a.seller_id)
-            WHERE a.product_id = $1;`,
-        [productIdInt]
-        );
+            WHERE a.product_id = ${productIdInt};`
+        ;
 
     if (rows.length === 0) {
         return res.status(404).json({ error: 'Product not found' });

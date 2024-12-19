@@ -12,7 +12,7 @@ interface SellerGalleryProps {
 
 export default function SellerGallery({ sellers }: SellerGalleryProps) {
   return (
-    <div className="container">
+    <div className="container-seller">
       <h1>Sellers Summary</h1>
       <table className="styled-table">
         <thead>
@@ -32,43 +32,6 @@ export default function SellerGallery({ sellers }: SellerGalleryProps) {
           ))}
         </tbody>
       </table>
-      <style jsx>{`
-        .container {
-          width: 80%;
-          margin: 0 auto;
-          padding: 20px;
-          text-align: center;
-        }
-        h1 {
-          font-size: 2rem;
-          margin-bottom: 20px;
-          color: #333;
-        }
-        .styled-table {
-          width: 100%;
-          border-collapse: collapse;
-          margin: 25px 0;
-          font-size: 18px;
-          text-align: left;
-        }
-        .styled-table th,
-        .styled-table td {
-          padding: 12px 15px;
-        }
-        .styled-table thead {
-          background-color: #007bff;
-          color: white;
-        }
-        .styled-table tbody tr:nth-child(even) {
-          background-color: #f2f2f2;
-        }
-        .styled-table tbody tr:hover {
-          background-color: #ddd;
-        }
-        .styled-table th {
-          font-weight: bold;
-        }
-      `}</style>
     </div>
   );
 }
