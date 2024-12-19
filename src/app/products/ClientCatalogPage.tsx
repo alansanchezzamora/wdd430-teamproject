@@ -1,20 +1,32 @@
-// src/app/users/catalog/ClientCatalogPage.tsx
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
+
+// Define a Product type to avoid using `any`
+interface Product {
+  product_id: string;
+  name: string;
+  description: string;
+  image_filename: string;
+  product_price: number;
+  name_seller: string;
+}
 
 export default function ClientCatalogPage({
   initialProducts,
 }: {
-  initialProducts: any[];
+  initialProducts: Product[];
 }) {
-  const [sortedProducts, setSortedProducts] = useState(initialProducts);
-  const [sortOrder, setSortOrder] = useState("asc");
+  const memoizedProducts = useMemo(() => initialProducts, [initialProducts]);
+
+  const [sortedProducts, setSortedProducts] =
+    useState<Product[]>(memoizedProducts);
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
 
   useEffect(() => {
-    const sorted = [...sortedProducts].sort((a, b) => {
+    const sorted = [...memoizedProducts].sort((a, b) => {
       if (sortOrder === "asc") {
         return a.product_price - b.product_price;
       } else {
@@ -22,7 +34,7 @@ export default function ClientCatalogPage({
       }
     });
     setSortedProducts(sorted);
-  }, [sortOrder]);
+  }, [sortOrder, memoizedProducts]);
 
   return (
     <div className="product-main">
@@ -33,7 +45,7 @@ export default function ClientCatalogPage({
         <select
           id="sort"
           value={sortOrder}
-          onChange={(e) => setSortOrder(e.target.value)}
+          onChange={(e) => setSortOrder(e.target.value as "asc" | "desc")}
         >
           <option value="asc">Low to High</option>
           <option value="desc">High to Low</option>
@@ -41,7 +53,7 @@ export default function ClientCatalogPage({
       </div>
 
       <ul className="card-container">
-        {sortedProducts.map((product: any) => (
+        {sortedProducts.map((product) => (
           <li key={product.product_id} className="prod-card">
             <div className="prod-img">
               <Link href={`/product/details/${product.product_id}`}>
