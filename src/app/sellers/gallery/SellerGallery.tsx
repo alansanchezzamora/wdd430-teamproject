@@ -1,6 +1,6 @@
 // src/app/sellers/SellerGalleryServer.tsx
-import { db } from "../../lib/db";
-import SellerGallery from "./SellerGalleryServer";
+import { db } from "../../../lib/db";
+import SellerGallery from "./SellerGallery";
 
 export default async function SellerGalleryServer() {
   const result = await db`
