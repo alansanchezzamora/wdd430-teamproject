@@ -56,7 +56,7 @@ export default function ClientCatalogPage({
         {sortedProducts.map((product) => (
           <li key={product.product_id} className="prod-card">
             <div className="prod-img">
-              <Link href={`/product/details/${product.product_id}`}>
+              <Link href={`/products/details/${product.product_id}`}>
                 <Image
                   src={`/images/${product.image_filename}`}
                   alt={`Product image of ${product.name}`}
@@ -69,7 +69,7 @@ export default function ClientCatalogPage({
             <div className="prod-details">
               <Link
                 className="prod-name"
-                href={`/product/details/${product.product_id}`}
+                href={`/products/details/${product.product_id}`}
               >
                 <h2 className="prod-name">{product.name}</h2>
               </Link>
